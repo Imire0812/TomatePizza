@@ -1,6 +1,6 @@
 package de.pizza.tomate.controller.dto;
 
-import de.pizza.tomate.domain.PizzaBase;
+import de.pizza.tomate.domain.Pizza;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,16 +8,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PizzaDTO {
     private Integer id;
-    private String name;
-    private String description;
-    private String size;
-    private Double price;
+    private PizzaBaseDTO pizzaBase;
+    private Double priceBase;
+    private Double total;
 
-    public static PizzaDTO getInstance(PizzaBase pizza) {
+    public static PizzaDTO getInstance(Pizza pizza) {
         return new PizzaDTO(pizza.getId(),
-                pizza.getPizzaType().getName(),
-                pizza.getPizzaType().getDescription(),
-                pizza.getPizzaSize().getName(),
-                pizza.getPrice());
+                PizzaBaseDTO.getInstance(pizza.getPizzaBase()),
+                pizza.getPriceBase(),
+                pizza.getTotal());
     }
 }
